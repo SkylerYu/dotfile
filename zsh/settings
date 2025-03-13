@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# 使用 `ls` 命令时启用颜色显示
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced  # 设置颜色样式（这是一个例子）
+
+# useful options(man menucomplete)
+setopt autocd extendedglob
+setopt interactive_comments
+unsetopt BEEP
+
+# Initialize completion
+autoload -Uz compinit
+compinit -i
+
+zstyle ':completion:*' menu select=4
+setopt menucomplete
+
+zmodload zsh/complist
+
+# Nicer history
+HISTSIZE=1048576
+HISTFILE="$HOME/.zsh_history"
+SAVEHIST=$HISTSIZE
+
+# Use nvim as the editor
+export EDITOR=nvim
+
+source "$ZDOTDIR/zsh-functions"
+
+# Add Plugins
+zsh_add_plugin "powerlevel10k"
+zsh_add_plugin "zsh-syntax-highlighting"
+zsh_add_plugin "zsh-vi-mode"
